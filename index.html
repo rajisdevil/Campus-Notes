@@ -1,0 +1,171 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="CampusNotes - Departmental Academic Resource Hub">
+  <title>CampusNotes | Study Together</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+
+<header class="navbar">
+  <a href="#" class="brand">
+    <span class="brand-icon">C</span>
+    CampusNotes
+  </a>
+  <nav>
+    <a href="#home">Home</a>
+    <a href="#resources">Resources</a>
+    <a href="#contribute">Contribute</a>
+    <a href="#about">About</a>
+  </nav>
+  <button id="themeBtn" class="icon-btn" aria-label="Toggle theme">☾</button>
+  <button id="loginBtn" class="primary-btn">Login</button>
+</header>
+
+<main>
+  <section class="hero" id="home">
+    <div class="hero-content">
+      <span class="eyebrow">YOUR DEPARTMENT. ONE PLATFORM.</span>
+      <h1>Study smarter.<br><span>Share knowledge.</span></h1>
+      <p>Find lecture notes, previous-year questions, lab files
+         and academic resources shared by your department.</p>
+      <a href="#resources" class="primary-btn">Explore Resources →</a>
+    </div>
+    <div class="hero-art">
+      <div class="book-emoji">📚</div>
+      <div class="floating-note">📄 Lecture Notes</div>
+      <div class="floating-note second">⚡ ECE Resources</div>
+    </div>
+  </section>
+
+  <section class="stats">
+    <div><strong id="totalCount">0</strong><span>Resources</span></div>
+    <div><strong>8</strong><span>Semesters</span></div>
+    <div><strong>24/7</strong><span>Access</span></div>
+  </section>
+
+  <section class="section" id="resources">
+    <div class="section-heading">
+      <div>
+        <span class="eyebrow">RESOURCE LIBRARY</span>
+        <h2>Explore study materials</h2>
+        <p>Everything you need, organized in one place.</p>
+      </div>
+    </div>
+
+    <div class="filters">
+      <input id="searchInput" type="search"
+        placeholder="Search notes, subjects or topics...">
+
+      <select id="semesterFilter">
+        <option value="all">All semesters</option>
+        <option value="1">Semester 1</option>
+        <option value="2">Semester 2</option>
+        <option value="3">Semester 3</option>
+        <option value="4">Semester 4</option>
+        <option value="5">Semester 5</option>
+        <option value="6">Semester 6</option>
+        <option value="7">Semester 7</option>
+        <option value="8">Semester 8</option>
+      </select>
+
+      <select id="typeFilter">
+        <option value="all">All categories</option>
+        <option value="Notes">Study Notes</option>
+        <option value="Question Paper">Question Papers</option>
+        <option value="Lab">Lab Materials</option>
+        <option value="Assignment">Assignments</option>
+      </select>
+    </div>
+
+    <div id="resourceGrid" class="resource-grid"></div>
+    <p id="emptyMessage" class="empty" hidden>
+      No resources found. Try another search.
+    </p>
+  </section>
+
+  <section class="contribute-section" id="contribute">
+    <div>
+      <span class="eyebrow">COMMUNITY CONTRIBUTION</span>
+      <h2>Have useful notes?</h2>
+      <p>Share your knowledge. Help another student prepare better.</p>
+    </div>
+    <form id="uploadForm" class="upload-form">
+      <label>Resource title
+        <input name="title" required maxlength="100"
+          placeholder="e.g. Digital Electronics Unit 1">
+      </label>
+      <label>Subject
+        <input name="subject" required maxlength="80"
+          placeholder="e.g. Digital Electronics">
+      </label>
+      <div class="form-row">
+        <label>Semester
+          <select name="semester" required>
+            <option value="">Select</option>
+            <option>1</option><option>2</option>
+            <option>3</option><option>4</option>
+            <option>5</option><option>6</option>
+            <option>7</option><option>8</option>
+          </select>
+        </label>
+        <label>Category
+          <select name="type" required>
+            <option>Notes</option>
+            <option>Question Paper</option>
+            <option>Lab</option>
+            <option>Assignment</option>
+          </select>
+        </label>
+      </div>
+      <label>Your name
+        <input name="author" required maxlength="60"
+          placeholder="Student name">
+      </label>
+      <label>PDF document
+        <input name="file" type="file" accept=".pdf,application/pdf" required>
+      </label>
+      <button class="primary-btn" type="submit">Submit for approval ↑</button>
+      <p id="uploadMessage" class="message" role="status"></p>
+    </form>
+  </section>
+
+  <section class="about section" id="about">
+    <span class="eyebrow">ABOUT CAMPUSNOTES</span>
+    <h2>Learning becomes better when shared.</h2>
+    <p>CampusNotes is an open-source academic resource platform
+       built to make educational materials accessible to students
+       across the department.</p>
+  </section>
+</main>
+
+<footer>
+  <a href="#" class="brand">CampusNotes.</a>
+  <p>Built by students, for students. © <span id="year"></span></p>
+  <p>Open source · Community driven</p>
+</footer>
+
+<dialog id="authDialog">
+  <form id="authForm" class="auth-form">
+    <button type="button" class="close-btn" id="closeAuth">✕</button>
+    <h2>Welcome to CampusNotes</h2>
+    <p>Sign in to contribute resources.</p>
+    <label>Email
+      <input name="email" type="email" required placeholder="you@example.com">
+    </label>
+    <label>Password
+      <input name="password" type="password" required minlength="6">
+    </label>
+    <button class="primary-btn" type="submit">Sign in / Create account</button>
+    <p id="authMessage" role="status"></p>
+  </form>
+</dialog>
+
+<script src="config.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
